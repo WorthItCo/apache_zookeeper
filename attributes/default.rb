@@ -8,7 +8,7 @@ default["zookeeper"]["max_processes"] = 1024
 
 default["zookeeper"]["env_vars"]["ZOO_LOG4J_PROP"] = "INFO,ROLLINGFILE"
 
-default["zookeeper"]["servers"] = []
+default["zookeeper"]["servers"] = node[:opsworks][:layers]['zookeeper'][:instances].map{|name, h| "#{h[:private_ip]}" }
 default["zookeeper"]["follower_port"] = 2888
 default["zookeeper"]["election_port"] = 3888
 
